@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Movie</title>
+</head>
+<body>
+    <h1>Search for a Movie</h1>
+    <form action="/search_movie" method="post">
+        <label for="search_term">Movie Title:</label><br>
+        <input type="text" id="search_term" name="search_term" required><br>
+        <input type="submit" value="Search">
+    </form>
+    <br>
+
+    {% if movies %}
+        <h2>Search Results:</h2>
+        {% for movie in movies %}
+            <div>
+                <h3>{{ movie.name }}</h3>
+                <img src="{{ movie.picture }}" alt="{{ movie.name }}">
+                <p>ID: {{ movie.id }}</p>
+                <h4>Available On:</h4>
+                <ul>
+                    {% for location in movie.locations %}
+                        <li>
+                            <a href="{{ location.url }}">
+                                <img src="{{ location.icon }}" alt="{{ location.display_name }}">
+                                {{ location.display_name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <!-- Add Movie Button -->
+                <form action="/add_movie_from_search" method="post">
+                    <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                    <input type="hidden" name="name" value="{{ movie.name }}">
+                    <input type="hidden" name="picture" value="{{ movie.picture }}">
+                    <input type="submit" value="Add Movie">
+                </form>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <a href="/">Back to Home</a>
+</body>
+</html>
