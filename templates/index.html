@@ -1,28 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Community movie list</title>
-</head>
-<body>
-    <h1>Welcome to the Community Movie List</h1>
-    <h2>Options</h2>
-    <ul>
-        <li><a href="/add_movie">Add a New Movie</a></li>
-        <li><a href="/search_movie">Search for a Movie</a></li>
-    </ul>
-    <h2>Available Movies</h2>
-    <ul>
-        {% for movie in movies %}
-            <li>
-                {{ movie.title }} - 
-                <a href="/view_movie/{{ movie.movie_id }}">View</a> | 
-                <form action="/delete_movie/{{ movie.movie_id }}" method="post" style="display: inline;">
-                    <input type="submit" value="Delete">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Videograph Template" />
+    <meta name="keywords" content="Videograph, unica, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Favorite Movies</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+
+    <!-- Css Styles -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+      type="text/css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/font-awesome.min.css') }}"
+      type="text/css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/elegant-icons.css') }}"
+      type="text/css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/owl.carousel.min.css') }}"
+      type="text/css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/magnific-popup.css') }}"
+      type="text/css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/slicknav.min.css') }}"
+      type="text/css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+      type="text/css" />
+  </head>
+
+  <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="header__logo">
+              <a href="./"><img src="static/img/logo.png" alt="" /></a>
+            </div>
+          </div>
+          <div class="col-lg-10">
+            <div class="header__nav__option">
+              <nav class="header__nav__menu mobile-menu"></nav>
+              <div class="header__nav__social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+      </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Begin -->
+    <div
+      class="breadcrumb-option spad set-bg"
+      data-setbg="static/img/breadcrumb-bg.jpg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <div class="breadcrumb__text">
+              <h2>Favorite Movies</h2>
+              <div class="breadcrumb__links">
+                <a href="#">Home</a>
+                <a href="/search_movie">Search Movies</a>
+                <a href="/add_movie">Add Movies</a>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Portfolio Section Begin -->
+    <section class="portfolio spad">
+      <div class="container">
+        <div class="row portfolio__gallery">
+          {% for movie in movies %}
+
+          <div class="col-lg-4 col-md-6 col-sm-6 mix digital-marketing">
+            <div class="portfolio__item">
+              <div
+                class="portfolio__item__video set-bg"
+                data-setbg="{{movie.image_url}}"></div>
+              <div class="portfolio__item__text">
+                <a href="view_movie/{{ movie.movie_id }}">
+                  <h4>{{movie.title}}</h4>
+                </a>
+                <span></span>
+                <form
+                  action="/delete_movie/{{ movie.movie_id }}"
+                  method="post"
+                  style="display: inline">
+                  <input type="submit" value="Delete" id="delete" />
                 </form>
-            </li>
-            
-        {% endfor %}
-    </ul>
-</body>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <!-- Portfolio Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__top">
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              <div class="footer__top__logo">
+                <a href="#"><img src="static/img/logo.png" alt="" /></a>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="footer__top__social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__option">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+              <div class="footer__option__item">
+                <h5>About us</h5>
+                <p>
+                  Formed in 2006 by Matt Hobbs and Cael Jones, Videoprah is an
+                  award-winning, full-service production company specializing.
+                </p>
+                <a href="#" class="read__more"
+                  >Read more <span class="arrow_right"></span
+                ></a>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-3">
+              <div class="footer__option__item">
+                <h5>Who we are</h5>
+                <ul>
+                  <li><a href="#">Team</a></li>
+                  <li><a href="#">Carrers</a></li>
+                  <li><a href="#">Contact us</a></li>
+                  <li><a href="#">Locations</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-3">
+              <div class="footer__option__item">
+                <h5>Our work</h5>
+                <ul>
+                  <li><a href="#">Feature</a></li>
+                  <li><a href="#">Latest</a></li>
+                  <li><a href="#">Browse Archive</a></li>
+                  <li><a href="#">Video for web</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="footer__option__item">
+                <h5>Newsletter</h5>
+                <p>
+                  Videoprah is an award-winning, full-service production company
+                  specializing.
+                </p>
+                <form action="#">
+                  <input type="text" placeholder="Email" />
+                  <button type="submit"><i class="fa fa-send"></i></button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__copyright">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              <p class="footer__copyright__text">
+                Copyright &copy;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                All rights reserved | This template is made with
+                <i class="fa fa-heart-o" aria-hidden="true"></i> by
+                <a href="https://colorlib.com" target="_blank">Colorlib</a>
+              </p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
 </html>
